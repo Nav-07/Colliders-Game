@@ -15,13 +15,25 @@ int main(int argc, char* argv[]) {
 
 	Paddle* paddle = new Paddle(20, SCREEN_HEIGHT-70);
 	EventHandler handler;
+
+	Uint32 frameStart;
+	int frameTime;
+
+	const int FPS = 30;
+	const float framedelay = 1000/FPS;
 	while (isRunning) {
+		frameStart = SDL_GetTicks();
+
 		handler.pollEvents(event, isRunning);
 		paddle->update(handler);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // This is the Color of the Screen
 		SDL_RenderClear(renderer);
 		paddle->render(renderer);
 		SDL_RenderPresent(renderer);
+
+		frameTime = SDL_GetTicks() - frameStart;
+		if (framedelay > frameTime)
+			SDL_Delay(framedelay-frameTime);
 	}
 
 	SDL_DestroyWindow(window);

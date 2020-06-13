@@ -19,7 +19,13 @@ void Paddle::handleKeyboard() {
 
 }
 void Paddle::update(EventHandler handler) {
-
+	float vel = 3;
+	if (handler.isKeyPressed(SDL_SCANCODE_A)) {
+		destRect.x -= vel;
+	} 
+	if (handler.isKeyPressed(SDL_SCANCODE_D)) {
+		destRect.x += vel;
+	}
 }
 void Paddle::render(SDL_Renderer* renderer) {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
