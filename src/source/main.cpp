@@ -1,6 +1,8 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
+#include "Paddle.hpp"
+#include "EventHandler.hpp"
 
 int main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -11,18 +13,21 @@ int main(int argc, char* argv[]) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	bool isRunning = true;
 
+	Paddle* paddle = new Paddle(20, SCREEN_HEIGHT-70);
+	EventHandler handler;
 	while (isRunning) {
-		SDL_PollEvent(&event);
-		if (event.type == SDL_QUIT)
-			isRunning = false;
-
+		handler.pollEvents(event, isRunning);
+		paddle->update(handler);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // This is the Color of the Screen
 		SDL_RenderClear(renderer);
-
+		paddle->render(renderer);
 		SDL_RenderPresent(renderer);
 	}
 
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
+
+	delete paddle;
 	return 0;
 }
