@@ -3,6 +3,7 @@
 #include <string>
 #include "Paddle.hpp"
 #include "EventHandler.hpp"
+#include "Vector2f.hpp"
 
 int main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -13,7 +14,7 @@ int main(int argc, char* argv[]) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	bool isRunning = true;
 
-	Paddle* paddle = new Paddle(20, SCREEN_HEIGHT-70);
+	Paddle* paddle = new Paddle(Vector2f(20, SCREEN_HEIGHT-70));
 	EventHandler handler;
 
 	Uint32 frameStart;

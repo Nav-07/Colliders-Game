@@ -1,19 +1,18 @@
 #include "Paddle.hpp"
 #include "EventHandler.hpp"
 
-void Paddle::init(unsigned int xpos, unsigned int ypos, unsigned int width, unsigned int height) {
-	this->mX = xpos;
-	this->mY = ypos;
+void Paddle::init(Vector2f position, unsigned int width, unsigned int height) {
+	this->mPosition = position;
 	this->mWidth = width;
 	this->mHeight = height;
 
-	this->destRect.x = this->mX;
-	this->destRect.y = this->mY;
+	this->destRect.x = this->mPosition.x;
+	this->destRect.y = this->mPosition.y;
 	this->destRect.w = this->mWidth;
 	this->destRect.h = this->mHeight;
 }
-Paddle::Paddle(unsigned int xpos, unsigned int ypos) {
-	this->init(xpos, ypos, 120, 30);
+Paddle::Paddle(Vector2f position) {
+	this->init(position, 120, 30);
 }
 void Paddle::handleKeyboard() {
 
