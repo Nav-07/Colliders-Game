@@ -6,7 +6,8 @@
 class Objects {
 private:
 	Vector2f mPosition;
+	SDL_Rect destRect;
 public:
 	Objects(Vector2f position);
-	void render();
+	void render(SDL_Renderer* renderer);
 };

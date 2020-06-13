@@ -4,6 +4,7 @@
 #include "Paddle.hpp"
 #include "EventHandler.hpp"
 #include "Vector2f.hpp"
+#include "Objects.hpp"
 
 int main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -20,6 +21,8 @@ int main(int argc, char* argv[]) {
 	Uint32 frameStart;
 	int frameTime;
 
+	Objects* object = new Objects(Vector2f(20, 20));
+
 	const int FPS = 30;
 	const float framedelay = 1000/FPS;
 	while (isRunning) {
@@ -29,7 +32,10 @@ int main(int argc, char* argv[]) {
 		paddle->update(handler);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // This is the Color of the Screen
 		SDL_RenderClear(renderer);
+		
 		paddle->render(renderer);
+		object->render(renderer);
+
 		SDL_RenderPresent(renderer);
 
 		frameTime = SDL_GetTicks() - frameStart;
@@ -42,5 +48,6 @@ int main(int argc, char* argv[]) {
 	SDL_Quit();
 
 	delete paddle;
+	delete object;
 	return 0;
 }
